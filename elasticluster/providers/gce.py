@@ -271,7 +271,8 @@ class GoogleCloudProvider(AbstractCloudProvider):
 
         # construct the request body
         if instance_name is None:
-            instance_name = 'elasticluster-%s' % uuid.uuid4()
+            import netifaces as ni
+            instance_name = 'ec-%s' % ni.ifaddresses('eth0')[2][0]['addr']
 
         public_key_content = file(public_key_path).read()
 
